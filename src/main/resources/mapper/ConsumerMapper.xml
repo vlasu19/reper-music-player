@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxnan.reper.mapper.ConsumerMapper">
+
+    <insert id="insert">
+        insert into consumer(username, password, sex, phone_num, email, birth, introduction, location, avator, create_time, update_time)
+        VALUES(#{username},#{password},#{sex},#{phoneNum},#{email},#{birth},#{introduction},#{location},#{avator},#{createTime},#{updateTime})
+    </insert>
+</mapper>

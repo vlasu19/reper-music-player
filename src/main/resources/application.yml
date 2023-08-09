@@ -1,0 +1,42 @@
+server:
+  port: 8888
+
+spring:
+  profiles:
+    active: dev
+  main:
+    allow-circular-references: true
+  datasource:
+    druid:
+      driver-class-name: ${reper.datasource.driver-class-name}
+      url: jdbc:mysql://${reper.datasource.host}:${reper.datasource.port}/${reper.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
+      username: ${reper.datasource.username}
+      password: ${reper.datasource.password}
+  redis:
+    host: ${reper.redis.host}
+    port: ${reper.redis.port}
+    database: ${reper.redis.database}
+    timeout: ${reper.redis.timeout}
+
+mybatis:
+  #mapper配置文件
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.xxnan.reper.entity
+  configuration:
+    #开启驼峰命名
+    map-underscore-to-camel-case: true
+
+reper:
+  jwt:
+    # 设置jwt签名加密时使用的秘钥
+    admin-secret-key: FairyKnightsAdmin
+    # 设置jwt过期时间
+    admin-ttl: 72000000
+    # 设置前端传递过来的令牌名称
+    admin-token-name: token
+      # 设置jwt签名加密时使用的秘钥
+    user-secret-key: FairyKnightsUser
+      # 设置jwt过期时间
+    user-ttl: 72000000
+      # 设置前端传递过来的令牌名称
+    user-token-name: token

@@ -1,0 +1,18 @@
+reper:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    host: localhost
+    port: 3306
+    database: tp_music
+    username: root
+    password: 123qwe
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    timeout: 1800000
+#  alioss:
+#    endpoint: oss-cn-beijing.aliyuncs.com
+#    access-key-id: LTAI5t7pFv9GmMdjvkUmtc2w
+#    access-key-secret: pj8nrtsN7ZuNXSjsFnjZISf76SDRj0
+#    bucket-name:
