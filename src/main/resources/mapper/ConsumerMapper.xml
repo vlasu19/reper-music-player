@@ -6,4 +6,20 @@
         insert into consumer(username, password, sex, phone_num, email, birth, introduction, location, avator, create_time, update_time)
         VALUES(#{username},#{password},#{sex},#{phoneNum},#{email},#{birth},#{introduction},#{location},#{avator},#{createTime},#{updateTime})
     </insert>
+    <update id="update">
+        update consumer
+        <set>
+            <if test="username!=null and username!=''">username=#{username},</if>
+            <if test="password!=null and password!=''">password=#{password},</if>
+            <if test="sex!=null">sex=#{sex},</if>
+            <if test="phoneNum!=null and phoneNum!=''">phone_num=#{phoneNum},</if>
+            <if test="email!=null and email!=''">email=#{email},</if>
+            <if test="birth!=null">birth=#{birth},</if>
+            <if test="introduction!=null">introduction=#{introduction},</if>
+            <if test="location!=null">location=#{location},</if>
+            <if test="avator!=null and avator!=''">avator=#{avator},</if>
+            <if test="updateTime!=null">update_time=#{updateTime},</if>
+        </set>
+        where id=#{id}
+    </update>
 </mapper>

@@ -11,4 +11,12 @@ public interface ConsumerService {
     void addConsumer(ConsumerDTO consumerDTO);
 
     Consumer verityPassword(ConsumerDTO consumerDTO);
+
+    Consumer userOfId(Integer id);
+
+    void deleteUser(Integer id);
+
+    void updateUserMsg(ConsumerDTO consumerDTO);
+
+    void updatePassword(ConsumerDTO consumerDTO);
 }

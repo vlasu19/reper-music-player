@@ -38,6 +38,7 @@ public class ConsumerController {
         List<Consumer>consumers = consumerService.allUser();
         return R.success("null",consumers);
     }
+
     @PostMapping("/add")
     @ApiOperation("注册")
     public R addUser(@RequestBody ConsumerDTO consumerDTO){
@@ -45,6 +46,7 @@ public class ConsumerController {
         consumerService.addConsumer(consumerDTO);
         return R.success("注册成功");
     }
+
     @PostMapping("/login/status")
     @ApiOperation("登录")
     public R loginStatus(@RequestBody ConsumerDTO consumerDTO){
@@ -63,4 +65,52 @@ public class ConsumerController {
 
         return R.success("登录成功",consumerLoginVO);
     }
+
+    /**
+     * 用户界面调用
+     * @param id
+     * @return
+     */
+    @GetMapping("/detail")
+    @ApiOperation("根据ID查询用户")
+    public R userOfId(@RequestParam Integer id) {
+        log.info("根据ID{}查询用户",id);
+        Consumer consumer=consumerService.userOfId(id);
+        return R.success(null,consumer);
+    }
+
+    /**
+     * TODO
+     * 目前批量删除是多次调用此接口，未来可能考虑一次请求传入多个ID进行批量删除
+     *
+     * 目前事务认定为：用户删除后收藏也删除，而评论和点赞留下
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/delete")
+    @ApiOperation("管理员删除用户")
+    public R deleteUser(@RequestParam Integer id) {
+        log.info("删除用户ID：{}",id);
+        consumerService.deleteUser(id);
+        return R.success("删除成功");
+    }
+
+    @PostMapping("/update")
+    @ApiOperation("修改用户信息")
+    public R updateUserMsg(@RequestBody ConsumerDTO consumerDTO) {
+        log.info("修改用户信息：{}",consumerDTO);
+        consumerService.updateUserMsg(consumerDTO);
+        return R.success("修改成功");
+    }
+
+    @PostMapping("/updatePassword")
+    @ApiOperation("修改密码")
+    public R updatePassword(@RequestBody ConsumerDTO consumerDTO) {
+        log.info("修改密码：{}",consumerDTO);
+        consumerService.updatePassword(consumerDTO);
+        return R.success("修改成功");
+    }
+
+
 }

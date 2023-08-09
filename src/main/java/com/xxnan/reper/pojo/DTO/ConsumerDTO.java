@@ -15,7 +15,7 @@ public class ConsumerDTO implements Serializable {
 
     private String username;
 
-//    private String oldPassword; //因为会用到用户旧密码 这无所谓的对应即可
+    private String oldPassword; //因为会用到用户旧密码 这无所谓的对应即可
 
     private String password;
 

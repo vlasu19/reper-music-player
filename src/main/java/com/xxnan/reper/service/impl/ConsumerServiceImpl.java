@@ -1,8 +1,11 @@
 package com.xxnan.reper.service.impl;
 
 import com.xxnan.reper.common.constant.MessageConstant;
+import com.xxnan.reper.common.exception.AccountNotFoundException;
 import com.xxnan.reper.common.exception.DuplicateUsernameException;
-import com.xxnan.reper.common.exception.InsertFailedException;
+import com.xxnan.reper.common.exception.SQLFailedException;
+import com.xxnan.reper.common.exception.PasswordErrorException;
+import com.xxnan.reper.mapper.CollectMapper;
 import com.xxnan.reper.mapper.ConsumerMapper;
 import com.xxnan.reper.pojo.DTO.ConsumerDTO;
 import com.xxnan.reper.pojo.entity.Consumer;
@@ -11,6 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 import java.nio.charset.StandardCharsets;
@@ -22,6 +26,8 @@ import static com.xxnan.reper.common.constant.MD5Constant.SALT;
 public class ConsumerServiceImpl implements ConsumerService {
     @Autowired
     private ConsumerMapper consumerMapper;
+    @Autowired
+    private CollectMapper collectMapper;
 
     @Override
     public List<Consumer> allUser() {
@@ -52,13 +58,68 @@ public class ConsumerServiceImpl implements ConsumerService {
         //这里可能存在PhoneNum、Email重复错误，放在全局异常处理里面处理
         int i=consumerMapper.insert(consumer);
         if(i<=0){
-            throw new InsertFailedException("注册失败");
+            throw new SQLFailedException(MessageConstant.SIGN_IN_FAILED);
         }
     }
 
     @Override
     public Consumer verityPassword(ConsumerDTO consumerDTO) {
+        String password= DigestUtils.md5DigestAsHex((SALT+consumerDTO.getPassword()).getBytes(StandardCharsets.UTF_8));
+        String username= consumerDTO.getUsername();
+        //System.out.println("md5:"+password);
+        Consumer consumer=consumerMapper.getByUsername(username);
+        //账号不存在
+        if(consumer==null){
+            throw new AccountNotFoundException(MessageConstant.ACCOUNT_NOT_FOUND);
+        }
+        //比较MD5加密后的值
+        if(!password.equals(consumer.getPassword())){
+            throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
+        }
+        return consumer;
+    }
 
-        return null;
+    @Override
+    public Consumer userOfId(Integer id) {
+        return consumerMapper.getById(id);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(Integer id) {
+        //删除用户
+        int i=consumerMapper.delById(id);
+        if(i<=0){
+            throw new SQLFailedException(MessageConstant.DEL_FAILED);
+        }
+        //删除用户收藏,没有的话不删除
+        collectMapper.delByUserId(id);
+    }
+
+    @Override
+    public void updateUserMsg(ConsumerDTO consumerDTO) {
+        Consumer consumer=new Consumer();
+        BeanUtils.copyProperties(consumerDTO,consumer);
+        int i=consumerMapper.update(consumer);
+        if(i<=0){
+            throw new SQLFailedException(MessageConstant.UPDATE_FAILED);
+        }
+    }
+
+    @Override
+    public void updatePassword(ConsumerDTO consumerDTO) {
+        //判断旧密码是否正确
+        String old=DigestUtils.md5DigestAsHex((SALT+consumerDTO.getOldPassword()).getBytes(StandardCharsets.UTF_8));
+        String neww=DigestUtils.md5DigestAsHex((SALT+consumerDTO.getPassword()).getBytes(StandardCharsets.UTF_8));
+        String now=consumerMapper.getById(consumerDTO.getId()).getPassword();
+        if(!old.equals(now)){
+            throw new PasswordErrorException(MessageConstant.PASSWORD_ERROR);
+        }
+        //修改密码
+        Consumer consumer=Consumer.builder().id(consumerDTO.getId()).password(neww).build();
+        int i=consumerMapper.update(consumer);
+        if(i<=0){
+            throw new SQLFailedException(MessageConstant.UPDATE_FAILED);
+        }
     }
 }
