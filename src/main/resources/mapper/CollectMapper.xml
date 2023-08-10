@@ -4,6 +4,6 @@
 
     <insert id="insert">
         insert into collect(user_id, type, song_id, song_list_id, create_time) VALUES
-        (#{userId},#{type},#{songId},#{songListId},#{createTime});
+        (#{userId},#{type},#{songId},#{songListId},#{createTime})
     </insert>
 </mapper>

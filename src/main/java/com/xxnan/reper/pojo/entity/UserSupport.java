@@ -1,5 +1,7 @@
 package com.xxnan.reper.pojo.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,16 +13,12 @@ import java.io.Serializable;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Banner implements Serializable {
-    /**
-     * 
-     */
-    private Integer id;
+public class UserSupport implements Serializable {
 
-    /**
-     * 
-     */
-    private String pic;
+    //    @TableId(type = IdType.AUTO)
+    private Integer id;
+    private Integer commentId;
+    private Integer userId;
 
     private static final long serialVersionUID = 1L;
 
@@ -35,9 +33,10 @@ public class Banner implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Banner other = (Banner) that;
+        UserSupport other = (UserSupport) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getPic() == null ? other.getPic() == null : this.getPic().equals(other.getPic()));
+                && (this.getCommentId() == null ? other.getCommentId() == null : this.getCommentId().equals(other.getCommentId()))
+                && (this.getUserId() == null ? other.getUserId() == null : this.getUserId().equals(other.getUserId()));
     }
 
     @Override
@@ -45,7 +44,8 @@ public class Banner implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getPic() == null) ? 0 : getPic().hashCode());
+        result = prime * result + ((getCommentId() == null) ? 0 : getCommentId().hashCode());
+        result = prime * result + ((getUserId() == null) ? 0 : getUserId().hashCode());
         return result;
     }
 
@@ -56,7 +56,8 @@ public class Banner implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", pic=").append(pic);
+        sb.append(", commentId=").append(commentId);
+        sb.append(", userId=").append(userId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
