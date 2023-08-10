@@ -8,4 +8,7 @@ public class MessageConstant {
     public static final String INSERT_FAILED="增加失败";
     public static final String UPDATE_FAILED="修改失败";
     public static final String DEL_FAILED="删除失败";
+    public static final String UPLOAD_FAILED="上传失败";
+    public static final String COLLECT_FAILED="收藏失败";
+    public static final String DEL_COLLECT_FAILED="取消收藏失败";
 }

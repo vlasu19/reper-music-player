@@ -40,3 +40,8 @@ reper:
     user-ttl: 72000000
       # 设置前端传递过来的令牌名称
     user-token-name: token
+  alioss:
+    endpoint: ${reper.alioss.endpoint}
+    access-key-id: ${reper.alioss.access-key-id}
+    access-key-secret: ${reper.alioss.access-key-secret}
+    bucket-name: ${reper.alioss.bucket-name}

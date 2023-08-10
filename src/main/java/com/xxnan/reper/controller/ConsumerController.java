@@ -2,8 +2,10 @@ package com.xxnan.reper.controller;
 
 
 import com.xxnan.reper.common.constant.JwtClaimsConstant;
+import com.xxnan.reper.common.constant.MessageConstant;
 import com.xxnan.reper.common.properties.JwtProperties;
 import com.xxnan.reper.common.result.R;
+import com.xxnan.reper.common.utils.AliOssUtil;
 import com.xxnan.reper.common.utils.JwtUtil;
 import com.xxnan.reper.pojo.DTO.ConsumerDTO;
 import com.xxnan.reper.pojo.VO.AdminLoginVO;
@@ -16,11 +18,15 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @Slf4j
 @RestController
@@ -31,6 +37,8 @@ public class ConsumerController {
     private ConsumerService consumerService;
     @Autowired
     private JwtProperties jwtProperties;
+    @Autowired
+    private AliOssUtil aliOssUtil;
 
     @GetMapping
     @ApiOperation("查询所有用户")
@@ -112,5 +120,31 @@ public class ConsumerController {
         return R.success("修改成功");
     }
 
-
+    /**
+     * 通过aliOssUtil将文件名拼接成路径并上传，返回拼接好的路径
+     * 然后将路径更新到数据库中
+     * 因为是两个步骤，所以加Transactional注解，测试时可以试下（上传成功+数据库失败）
+     *
+     * @param file
+     * @param id
+     * @return
+     */
+    @PostMapping("/avatar/update")
+    @ApiOperation("头像上传")
+    @Transactional
+    public R updateUserPic(MultipartFile file, Integer id) {
+        log.info("头像上传：{}",file);
+        String filePath;
+        try {
+            String originalFilename = file.getOriginalFilename();
+            String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+            String objectName= UUID.randomUUID().toString()+suffix;
+            filePath = aliOssUtil.upload(file.getBytes(), objectName);
+        } catch (IOException e) {
+            return R.fatal(MessageConstant.UPLOAD_FAILED +e.getMessage());
+        }
+        Consumer consumer=Consumer.builder().id(id).avator(filePath).build();
+        consumerService.updateUserAvator(consumer);
+        return R.success("上传成功");
+    }
 }

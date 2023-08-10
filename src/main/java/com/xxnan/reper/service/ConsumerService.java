@@ -19,4 +19,6 @@ public interface ConsumerService {
     void updateUserMsg(ConsumerDTO consumerDTO);
 
     void updatePassword(ConsumerDTO consumerDTO);
+
+    void updateUserAvator(Consumer consumer);
 }

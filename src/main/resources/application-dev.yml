@@ -11,8 +11,8 @@ reper:
     port: 6379
     database: 0
     timeout: 1800000
-#  alioss:
-#    endpoint: oss-cn-beijing.aliyuncs.com
-#    access-key-id: LTAI5t7pFv9GmMdjvkUmtc2w
-#    access-key-secret: pj8nrtsN7ZuNXSjsFnjZISf76SDRj0
-#    bucket-name:
+  alioss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    access-key-id: LTAI5t7pFv9GmMdjvkUmtc2w
+    access-key-secret: pj8nrtsN7ZuNXSjsFnjZISf76SDRj0
+    bucket-name: reper-music-player

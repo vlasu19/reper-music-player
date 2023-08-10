@@ -122,4 +122,12 @@ public class ConsumerServiceImpl implements ConsumerService {
             throw new SQLFailedException(MessageConstant.UPDATE_FAILED);
         }
     }
+
+    @Override
+    public void updateUserAvator(Consumer consumer) {
+        int i= consumerMapper.update(consumer);
+        if(i<=0){
+            throw new SQLFailedException(MessageConstant.UPLOAD_FAILED);
+        }
+    }
 }
