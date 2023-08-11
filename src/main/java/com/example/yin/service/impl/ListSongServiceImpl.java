@@ -19,6 +19,9 @@ public class ListSongServiceImpl extends ServiceImpl<ListSongMapper, ListSong> i
     @Autowired
     private ListSongMapper listSongMapper;
 
+    /*
+    返回歌曲
+     */
     @Override
     public List<ListSong> allListSong() {
         return listSongMapper.selectList(null);

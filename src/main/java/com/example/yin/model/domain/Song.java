@@ -13,6 +13,7 @@ public class Song {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
+
     private Integer singerId;
 
     private String name;

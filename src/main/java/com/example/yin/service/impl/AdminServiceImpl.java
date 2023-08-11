@@ -18,6 +18,9 @@ public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements
     @Autowired
     private AdminMapper adminMapper;
 
+    /*
+    判断是否登录成功
+     */
     @Override
     public R verityPasswd(AdminRequest adminRequest, HttpSession session) {
         QueryWrapper<Admin> queryWrapper = new QueryWrapper<>();

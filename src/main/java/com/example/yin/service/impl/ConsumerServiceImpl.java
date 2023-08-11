@@ -63,6 +63,9 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer>
         }
     }
 
+    /**
+     更新用户信息
+     */
     @Override
     public R updateUserMsg(ConsumerRequest updateRequest) {
         Consumer consumer = new Consumer();
@@ -74,6 +77,9 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer>
         }
     }
 
+    /**
+     * 更新用户密码
+     */
     @Override
     public R updatePassword(ConsumerRequest updatePasswordRequest) {
 
@@ -93,6 +99,9 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer>
         }
     }
 
+    /**
+     * 更新用户头像
+     */
     @Override
     public R updateUserAvator(MultipartFile avatorFile, int id) {
         String fileName = System.currentTimeMillis() + avatorFile.getOriginalFilename();
@@ -119,6 +128,9 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer>
         }
     }
 
+    /*
+    判断用户是否存在
+     */
     @Override
     public boolean existUser(String username) {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
@@ -126,6 +138,9 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer>
         return consumerMapper.selectCount(queryWrapper) > 0;
     }
 
+    /*
+    加密密码
+     */
     @Override
     public boolean verityPasswd(String username, String password) {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
@@ -146,11 +161,18 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer>
         }
     }
 
+    /*
+    查询所有用户
+     */
     @Override
     public R allUser() {
         return R.success(null, consumerMapper.selectList(null));
     }
 
+
+    /*
+    得到某用户的id
+     */
     @Override
     public R userOfId(Integer id) {
         QueryWrapper<Consumer> queryWrapper = new QueryWrapper<>();
@@ -158,6 +180,9 @@ public class ConsumerServiceImpl extends ServiceImpl<ConsumerMapper, Consumer>
         return R.success(null, consumerMapper.selectList(queryWrapper));
     }
 
+    /*
+    登陆判断
+     */
     @Override
     public R loginStatus(ConsumerRequest loginRequest, HttpSession session) {
 

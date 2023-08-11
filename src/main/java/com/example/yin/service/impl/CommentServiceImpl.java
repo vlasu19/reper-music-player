@@ -16,6 +16,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
     @Autowired
     private CommentMapper commentMapper;
 
+    /*
+用户添加评论
+ */
     @Override
     public R addComment(CommentRequest addCommentRequest) {
         Comment comment = new Comment();
@@ -28,6 +31,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
     }
 
+    /*
+    用户点赞
+     */
     @Override
     public R updateCommentMsg(CommentRequest addCommentRequest) {
         Comment comment = new Comment();
@@ -49,6 +55,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         }
     }
 
+    /*
+    获得指定歌曲 ID 的评论列表
+     */
     @Override
     public R commentOfSongId(Integer songId) {
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
@@ -56,6 +65,9 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
         return R.success(null, commentMapper.selectList(queryWrapper));
     }
 
+    /*
+    获得指定歌单 ID 的评论列表
+     */
     @Override
     public R commentOfSongListId(Integer songListId) {
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();

@@ -16,6 +16,9 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
     @Autowired
     private CollectMapper collectMapper;
 
+    /*
+    添加收藏的歌曲
+     */
     @Override
     public R addCollection(CollectRequest addCollectRequest) {
         //作者用type来判断收藏的是歌还是歌单
@@ -28,6 +31,10 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         }
     }
 
+
+    /*
+    某用户是否已收藏某歌曲
+     */
     @Override
     public R existSongId(CollectRequest isCollectRequest) {
         QueryWrapper<Collect> queryWrapper = new QueryWrapper();
@@ -40,6 +47,9 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         }
     }
 
+    /*
+    取消收藏
+     */
     @Override
     public R deleteCollect(Integer userId, Integer songId) {
         QueryWrapper<Collect> queryWrapper = new QueryWrapper();
@@ -52,6 +62,9 @@ public class CollectServiceImpl extends ServiceImpl<CollectMapper, Collect> impl
         }
     }
 
+    /*
+    查询某用户的所有收藏列表
+     */
     @Override
     public R collectionOfUser(Integer userId) {
         QueryWrapper<Collect> queryWrapper = new QueryWrapper();
