@@ -1,6 +1,7 @@
 package com.xxnan.reper.service.impl;
 
 import com.xxnan.reper.common.constant.MessageConstant;
+import com.xxnan.reper.common.constant.PathConstant;
 import com.xxnan.reper.common.exception.SQLFailedException;
 import com.xxnan.reper.mapper.SingerMapper;
 import com.xxnan.reper.mapper.SongMapper;
@@ -26,8 +27,7 @@ public class SingerServiceImpl implements SingerService {
     public void addSinger(SingerDTO singerDTO) {
         Singer singer = new Singer();
         BeanUtils.copyProperties(singerDTO, singer);
-//        String pic = "/img/avatorImages/user.jpg";
-//        singer.setPic(pic);
+        singer.setPic(PathConstant.DEFAULT_PIC);
         int i=singerMapper.insert(singer);
         if(i<=0){
             throw new SQLFailedException(MessageConstant.INSERT_FAILED);

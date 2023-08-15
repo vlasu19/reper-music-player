@@ -1,6 +1,8 @@
 package com.xxnan.reper.pojo.entity;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,32 +10,20 @@ import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
 
-//@TableName(value = "song_list")
+//@TableName(value = "list_song")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SongList implements Serializable {
+public class ListSong implements Serializable {
 
 //    @TableId(type = IdType.AUTO)
     private Integer id;
 
-    private String title;
+    private Integer songId;
 
-    private String pic;
-
-    private String style;
-
-    private String introduction;
-
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
-
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime updateTime;
+    private Integer songListId;
 
     @Override
     public String toString() {

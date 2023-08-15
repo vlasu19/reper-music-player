@@ -1,6 +1,7 @@
 package com.xxnan.reper.service.impl;
 
 import com.xxnan.reper.common.constant.MessageConstant;
+import com.xxnan.reper.common.constant.PathConstant;
 import com.xxnan.reper.common.exception.AccountNotFoundException;
 import com.xxnan.reper.common.exception.DuplicateUsernameException;
 import com.xxnan.reper.common.exception.SQLFailedException;
@@ -52,8 +53,8 @@ public class ConsumerServiceImpl implements ConsumerService {
         if (StringUtils.isBlank(consumer.getEmail())) {
             consumer.setEmail(null);
         }
-        //TODO 放到服务器上后，这条语句可能会做修改
-        consumer.setAvator("img/avatorImages/user.jpg");
+        //默认图片
+        consumer.setAvator(PathConstant.DEFAULT_PIC);
         //插入
         //这里可能存在PhoneNum、Email重复错误，放在全局异常处理里面处理
         int i=consumerMapper.insert(consumer);

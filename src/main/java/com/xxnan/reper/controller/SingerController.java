@@ -38,7 +38,7 @@ public class SingerController {
     public R addSinger(@RequestBody SingerDTO singerDTO) {
         log.info("新增歌手：{}",singerDTO);
         singerService.addSinger(singerDTO);
-        return R.success(null);
+        return R.success("添加成功");
     }
 
     /**
@@ -50,7 +50,7 @@ public class SingerController {
     public R deleteSinger(@RequestParam Integer id) {
         log.info("删除歌手ID{}",id);
         singerService.deleteSinger(id);
-        return R.success(null);
+        return R.success("删除成功");
     }
 
     // 返回所有歌手
