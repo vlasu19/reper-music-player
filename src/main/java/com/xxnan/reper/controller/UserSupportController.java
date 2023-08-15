@@ -23,15 +23,22 @@ public class UserSupportController {
     @Autowired
     private UserSupportService userSupportService;
 
+    /**
+     * TODO 当删除评论的时候会发起此接口请求，界面出现不该出现的返回信息
+     *
+     *
+     * @param userSupportDTO
+     * @return
+     */
     @PostMapping("/test")
     @ApiOperation("查看是否已点赞")
     public R isUserSupportComment(@RequestBody UserSupportDTO userSupportDTO) {
         log.info("查看是否已点赞：{}",userSupportDTO);
         UserSupport userSupport=userSupportService.isUserSupportComment(userSupportDTO);
         if (userSupport!=null) {
-            return R.success("您已取消点赞", true);
+            return R.success("取消点赞成功", true);
         } else {
-            return R.success("您已点赞", false);
+            return R.success("点赞成功", false);
         }
     }
 

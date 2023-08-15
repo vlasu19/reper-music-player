@@ -45,3 +45,6 @@ reper:
     access-key-id: ${reper.alioss.access-key-id}
     access-key-secret: ${reper.alioss.access-key-secret}
     bucket-name: ${reper.alioss.bucket-name}
+#mybatis-plus:
+#  global-config:
+#    banner: off

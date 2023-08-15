@@ -11,23 +11,33 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-//@TableName(value = "collect")
+//@TableName(value = "comment")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Collect implements Serializable {
+public class Comment implements Serializable {
 //    @TableId(type = IdType.AUTO)
     private Integer id;
 
     private Integer userId;
 
-    private Byte type;
-
     private Integer songId;
 
     private Integer songListId;
 
+    private String content;
+
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
+
+    private Byte type;
+
+    private Integer up;
+
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

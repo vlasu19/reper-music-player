@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxnan.reper.mapper.CommentMapper">
+
+    <update id="update">
+        update comment
+        <set>
+            <if test="userId!=null">user_id=#{userId},</if>
+            <if test="songId!=null">song_id=#{songId},</if>
+            <if test="songListId!=null">song_list_id=#{songListId},</if>
+            <if test="content!=null">content=#{content},</if>
+            <if test="createTime!=null">create_time=#{createTime},</if>
+            <if test="type!=null">type=#{type},</if>
+            <if test="up!=null">up=#{up},</if>
+        </set>
+    </update>
+</mapper>

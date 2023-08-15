@@ -16,4 +16,7 @@ public interface UserSupportMapper {
 
     @Delete("delete from user_support where user_id=#{userId} and comment_id=#{commentId}")
     int delByUserAndComment(Integer userId, Integer commentId);
+
+    @Delete("delete from user_support where comment_id=#{commentId}")
+    int delByCommentId(Integer commentId);
 }

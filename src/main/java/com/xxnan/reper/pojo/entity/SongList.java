@@ -8,26 +8,34 @@ import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
-//@TableName(value = "collect")
+//@TableName(value = "song_list")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Collect implements Serializable {
+public class SongList implements Serializable {
+
 //    @TableId(type = IdType.AUTO)
     private Integer id;
 
-    private Integer userId;
+    private String title;
 
-    private Byte type;
+    private String pic;
 
-    private Integer songId;
+    private String style;
 
-    private Integer songListId;
+    private String introduction;
 
     @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime createTime;
+    private Date createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date updateTime;
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

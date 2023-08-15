@@ -11,23 +11,36 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Date;
 
-//@TableName(value = "collect")
+//@TableName(value = "singer")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Collect implements Serializable {
+public class Singer implements Serializable {
+
 //    @TableId(type = IdType.AUTO)
     private Integer id;
 
-    private Integer userId;
+    private String name;
 
-    private Byte type;
+    private Byte sex;
 
-    private Integer songId;
+    private String pic;
 
-    private Integer songListId;
+    private Date birth;
+
+    private String location;
+
+    private String introduction;
 
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

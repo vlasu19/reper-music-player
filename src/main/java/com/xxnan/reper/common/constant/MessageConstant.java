@@ -11,4 +11,6 @@ public class MessageConstant {
     public static final String UPLOAD_FAILED="上传失败";
     public static final String COLLECT_FAILED="收藏失败";
     public static final String DEL_COLLECT_FAILED="取消收藏失败";
+    public static final String SUPPORT_FAILED="点赞失败";
+    public static final String COMMENT_FAILED="评论失败";
 }

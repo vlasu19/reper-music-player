@@ -3,6 +3,7 @@ package com.xxnan.reper.controller;
 
 import com.xxnan.reper.common.constant.JwtClaimsConstant;
 import com.xxnan.reper.common.constant.MessageConstant;
+import com.xxnan.reper.common.constant.PathConstant;
 import com.xxnan.reper.common.properties.JwtProperties;
 import com.xxnan.reper.common.result.R;
 import com.xxnan.reper.common.utils.AliOssUtil;
@@ -138,7 +139,7 @@ public class ConsumerController {
         try {
             String originalFilename = file.getOriginalFilename();
             String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-            String objectName= UUID.randomUUID().toString()+suffix;
+            String objectName= PathConstant.USER_AVATOR+UUID.randomUUID().toString()+suffix;
             filePath = aliOssUtil.upload(file.getBytes(), objectName);
         } catch (IOException e) {
             return R.fatal(MessageConstant.UPLOAD_FAILED +e.getMessage());
