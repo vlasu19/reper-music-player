@@ -28,6 +28,6 @@ public class Collect implements Serializable {
 
     private Integer songListId;
 
-    @TableField(fill = FieldFill.INSERT)
+//    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 }

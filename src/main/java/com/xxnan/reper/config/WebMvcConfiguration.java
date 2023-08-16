@@ -1,5 +1,6 @@
 package com.xxnan.reper.config;
 
+import com.xxnan.reper.common.constant.PathConstant;
 import com.xxnan.reper.common.json.JacksonObjectMapper;
 import com.xxnan.reper.interceptor.JwtTokenAdminInterceptor;
 import lombok.extern.slf4j.Slf4j;
@@ -77,8 +78,23 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
      * @param registry
      */
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        SWAGGER
         registry.addResourceHandler("/doc.html").addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+
+//        本地资源路径处理
+        registry.addResourceHandler("/img/avatorImages/**")
+                .addResourceLocations(PathConstant.AVATOR_IMAGES_PATH);
+        registry.addResourceHandler("/img/singerPic/**")
+                .addResourceLocations(PathConstant.SINGER_PIC_PATH);
+        registry.addResourceHandler("/img/songPic/**")
+                .addResourceLocations(PathConstant.SONG_PIC_PATH);
+        registry.addResourceHandler("/song/**")
+                .addResourceLocations(PathConstant.SONG_PATH);
+        registry.addResourceHandler("/img/songListPic/**")
+                .addResourceLocations(PathConstant.SONGLIST_PIC_PATH);
+        registry.addResourceHandler("/img/swiper/**")
+                .addResourceLocations(PathConstant.BANNER_PIC_PATH);
     }
 
     /**

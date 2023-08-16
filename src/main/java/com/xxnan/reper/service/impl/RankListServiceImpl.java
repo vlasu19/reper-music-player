@@ -9,10 +9,11 @@ import com.xxnan.reper.service.RankListService;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Mapper
+@Service
 public class RankListServiceImpl implements RankListService {
     @Autowired
     private RankListMapper rankListMapper;

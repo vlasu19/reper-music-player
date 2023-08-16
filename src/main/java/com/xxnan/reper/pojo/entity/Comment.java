@@ -28,7 +28,7 @@ public class Comment implements Serializable {
 
     private String content;
 
-    @TableField(fill = FieldFill.INSERT)
+//    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
     private Byte type;

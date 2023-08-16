@@ -1,5 +1,7 @@
 package com.xxnan.reper.mapper;
 
+import com.xxnan.reper.annotation.AutoFill;
+import com.xxnan.reper.common.enumeration.OperationType;
 import com.xxnan.reper.pojo.entity.ListSong;
 import com.xxnan.reper.pojo.entity.Song;
 import org.apache.ibatis.annotations.Delete;
@@ -16,6 +18,7 @@ public interface ListSongMapper {
     int delBySongListId(Integer songListId);
 
     @Insert("insert into list_song(song_id, song_list_id) values (#{songId},#{listSongId})")
+//    @AutoFill(OperationType.INSERT)
     int insert(ListSong listSong);
 
     @Delete("delete from list_song where song_id=#{songId} and song_list_id=#{songListId}")
@@ -24,6 +27,7 @@ public interface ListSongMapper {
     @Select("select * from list_song where song_list_id=#{songListId} order by song_id")
     List<ListSong> getBySongListId(Integer songListId);
 
+//    @AutoFill(OperationType.UPDATE)
     int update(ListSong listSong);
 
     @Delete("delete from list_song where song_id=#{songId}")
