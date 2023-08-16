@@ -18,11 +18,14 @@ public interface ListSongMapper {
     @Insert("insert into list_song(song_id, song_list_id) values (#{songId},#{listSongId})")
     int insert(ListSong listSong);
 
-    @Delete("delete from list_song where song_id=#{songId}")
-    int delBySongId(Integer songId);
+    @Delete("delete from list_song where song_id=#{songId} and song_list_id=#{songListId}")
+    int delBySongAndSList(Integer songId,Integer songListId);
 
-    @Select("select * from list_song where song_list_id=#{songListId}")
+    @Select("select * from list_song where song_list_id=#{songListId} order by song_id")
     List<ListSong> getBySongListId(Integer songListId);
 
     int update(ListSong listSong);
+
+    @Delete("delete from list_song where song_id=#{songId}")
+    int delBySongId(Integer id);
 }

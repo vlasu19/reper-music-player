@@ -2,4 +2,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xxnan.reper.mapper.SongMapper">
 
+    <insert id="insert">
+        insert into song(singer_id, name, introduction, create_time, update_time, pic, lyric, url) values
+        (#{singerId},#{name},#{introduction},#{createTime},#{updateTime},#{pic},#{lyric},#{url})
+    </insert>
+
+    <select id="criteriaQuery" resultType="com.xxnan.reper.pojo.entity.Song">
+        select * from song
+        <where>
+            <if test="singerId!=null">and singer_id=#{singerId}</if>
+            <if test="name!=null and name!=''">and name like concat('%',#{name},'%')</if>
+        </where>
+    </select>
+
+    <update id="update">
+        update song
+        <set>
+            <if test="singerId!=null">singer_id=#{singerId},</if>
+            <if test="name!=null and name!=''">name=#{name},</if>
+            <if test="introduction!=null">introduction=#{introduction},</if>
+            <if test="updateTime!=null">update_time=#{updateTime},</if>
+            <if test="pic!=null">pic=#{pic},</if>
+            <if test="lyric!=null">lyric=#{lyric},</if>
+            <if test="url!=null">url=#{url},</if>
+        </set>
+        where id=#{id}
+    </update>
 </mapper>
