@@ -41,6 +41,7 @@ public class RankListServiceImpl implements RankListService {
 
     @Override
     public Integer getUserRank(Integer consumerId, Integer songListId) {
-        return rankListMapper.getScore(consumerId,songListId);
+        int i = rankListMapper.getScore(consumerId,songListId);
+        return i;
     }
 }

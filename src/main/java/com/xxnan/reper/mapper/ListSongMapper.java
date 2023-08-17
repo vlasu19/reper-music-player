@@ -17,7 +17,7 @@ public interface ListSongMapper {
     @Delete("delete from list_song where song_list_id=#{songListId}")
     int delBySongListId(Integer songListId);
 
-    @Insert("insert into list_song(song_id, song_list_id) values (#{songId},#{listSongId})")
+    @Insert("insert into list_song(song_id, song_list_id) values (#{songId},#{songListId})")
 //    @AutoFill(OperationType.INSERT)
     int insert(ListSong listSong);
 
@@ -32,4 +32,7 @@ public interface ListSongMapper {
 
     @Delete("delete from list_song where song_id=#{songId}")
     int delBySongId(Integer id);
+
+    @Select("select * from list_song where song_id=#{songId}")
+    List<ListSong> getBySongId(Integer songId);
 }

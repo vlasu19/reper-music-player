@@ -35,6 +35,7 @@ public class UserSupportController {
     public R isUserSupportComment(@RequestBody UserSupportDTO userSupportDTO) {
         log.info("查看是否已点赞：{}",userSupportDTO);
         UserSupport userSupport=userSupportService.isUserSupportComment(userSupportDTO);
+        System.out.println(userSupport);
         if (userSupport!=null) {
             return R.success("取消点赞成功", true);
         } else {

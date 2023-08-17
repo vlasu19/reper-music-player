@@ -31,6 +31,8 @@ public class Comment implements Serializable {
 //    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
+    private LocalDateTime updateTime;
+
     private Byte type;
 
     private Integer up;

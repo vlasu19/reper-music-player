@@ -5,6 +5,7 @@ import com.xxnan.reper.common.exception.SQLFailedException;
 import com.xxnan.reper.mapper.ListSongMapper;
 import com.xxnan.reper.mapper.SongMapper;
 import com.xxnan.reper.pojo.DTO.SongDTO;
+import com.xxnan.reper.pojo.entity.ListSong;
 import com.xxnan.reper.pojo.entity.Song;
 import com.xxnan.reper.service.SongService;
 import org.springframework.beans.BeanUtils;
@@ -34,8 +35,11 @@ public class SongServiceImpl implements SongService {
     public void deleteSong(Integer id) {
         int i=songMapper.delById(id);
         if(i<=0)throw new SQLFailedException(MessageConstant.DEL_FAILED);
-        i=listSongMapper.delBySongId(id);
-        if(i<=0)throw new SQLFailedException(MessageConstant.DEL_FAILED);
+        List<ListSong>listSongs=listSongMapper.getBySongId(id);
+        if(listSongs.size()>0){
+            i = listSongMapper.delBySongId(id);
+            if (i <= 0) throw new SQLFailedException(MessageConstant.DEL_FAILED);
+        }
     }
 
     @Override

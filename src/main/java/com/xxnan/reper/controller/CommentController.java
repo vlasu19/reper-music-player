@@ -60,6 +60,6 @@ public class CommentController {
     public R commentOfLike(@RequestBody CommentDTO commentDTO) {
         log.info("修改评论显示的点赞数{}",commentDTO.getUp());
         commentService.updateCommentMsg(commentDTO);
-        return R.success(null);
+        return R.success("点赞成功");
     }
 }

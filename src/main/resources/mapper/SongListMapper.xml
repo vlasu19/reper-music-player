@@ -10,8 +10,8 @@
     <select id="criteriaQuery" resultType="com.xxnan.reper.pojo.entity.SongList">
         select * from song_list
         <where>
-            <if test="title!=null and title!=''">and title=#{title}</if>
-            <if test="style!=null and style!=''">and style=#{style},</if>
+            <if test="title!=null and title!=''">and title like concat('%',#{title},'%')</if>
+            <if test="style!=null and style!=''">and style like concat('%',#{style},'%')}</if>
         </where>
     </select>
 

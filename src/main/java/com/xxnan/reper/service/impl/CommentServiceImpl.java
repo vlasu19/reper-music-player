@@ -7,6 +7,7 @@ import com.xxnan.reper.mapper.CommentMapper;
 import com.xxnan.reper.mapper.UserSupportMapper;
 import com.xxnan.reper.pojo.DTO.CommentDTO;
 import com.xxnan.reper.pojo.entity.Comment;
+import com.xxnan.reper.pojo.entity.UserSupport;
 import com.xxnan.reper.service.CommentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class CommentServiceImpl implements CommentService {
         Comment comment=new Comment();
         BeanUtils.copyProperties(commentDTO,comment);
         comment.setType(commentDTO.getNowType());
+        comment.setUp(0);
         int i=commentMapper.insert(comment);
         if(i<=0){
             throw new SQLFailedException(MessageConstant.COMMENT_FAILED);
@@ -60,9 +62,12 @@ public class CommentServiceImpl implements CommentService {
         if(i<=0){
             throw new SQLFailedException(MessageConstant.DEL_FAILED);
         }
-        i=userSupportMapper.delByCommentId(id);
-        if(i<=0){
-            throw new SQLFailedException(MessageConstant.DEL_FAILED);
+        List<UserSupport>userSupports=userSupportMapper.getByCommentId(id);
+        if(userSupports.size()>0) {
+            i = userSupportMapper.delByCommentId(id);
+            if (i <= 0) {
+                throw new SQLFailedException(MessageConstant.DEL_FAILED);
+            }
         }
     }
 }

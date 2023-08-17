@@ -7,6 +7,7 @@ import com.xxnan.reper.mapper.SingerMapper;
 import com.xxnan.reper.mapper.SongMapper;
 import com.xxnan.reper.pojo.DTO.SingerDTO;
 import com.xxnan.reper.pojo.entity.Singer;
+import com.xxnan.reper.pojo.entity.Song;
 import com.xxnan.reper.service.SingerService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,9 +42,12 @@ public class SingerServiceImpl implements SingerService {
         if(i<=0){
             throw new SQLFailedException(MessageConstant.DEL_FAILED);
         }
-        i=songMapper.delBySingerId(id);
-        if(i<=0){
-            throw new SQLFailedException(MessageConstant.DEL_FAILED);
+        List<Song>songs= songMapper.criteriaQuery(id,null);
+        if(songs.size()>0) {
+            i = songMapper.delBySingerId(id);
+            if (i <= 0) {
+                throw new SQLFailedException(MessageConstant.DEL_FAILED);
+            }
         }
     }
 

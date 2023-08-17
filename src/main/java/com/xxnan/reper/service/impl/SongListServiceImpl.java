@@ -43,9 +43,10 @@ public class SongListServiceImpl implements SongListService {
         if(i<=0){
             throw new SQLFailedException(MessageConstant.DEL_FAILED);
         }
-        i=listSongMapper.delBySongListId(id);
-        if(i<=0){
-            throw new SQLFailedException(MessageConstant.DEL_FAILED);
+        List<ListSong>listSongs= listSongMapper.getBySongListId(id);
+        if(listSongs.size()>0) {
+            i=listSongMapper.delBySongListId(id);
+            if(i<=0){ throw new SQLFailedException(MessageConstant.DEL_FAILED);}
         }
     }
 
