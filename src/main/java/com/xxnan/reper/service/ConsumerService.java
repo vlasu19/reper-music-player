@@ -12,7 +12,7 @@ public interface ConsumerService {
 
     Consumer verityPassword(ConsumerDTO consumerDTO);
 
-    Consumer userOfId(Integer id);
+    List<Consumer> userOfId(Integer id);
 
     void deleteUser(Integer id);
 

@@ -22,6 +22,9 @@ public interface ConsumerMapper {
     int insert(Consumer consumer);
 
     @Select("select * from consumer where id=#{id}")
+    List<Consumer> getBatchById(Integer id);
+
+    @Select("select * from consumer where id=#{id}")
     Consumer getById(Integer id);
 
     @Delete("delete from consumer where id=#{id}")

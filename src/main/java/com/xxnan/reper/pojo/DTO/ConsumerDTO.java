@@ -25,7 +25,7 @@ public class ConsumerDTO implements Serializable {
 
     private String email;
 
-    private Date birth;
+    private LocalDate birth;
 
     private String introduction;
 

@@ -12,7 +12,7 @@ public interface SongService {
 
     List<Song> allSong();
 
-    Song songOfId(Integer id);
+    List<Song> songOfId(Integer id);
 
     List<Song> songOfSingerId(Integer singerId);
 

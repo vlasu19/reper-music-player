@@ -2,6 +2,7 @@ package com.xxnan.reper.pojo.DTO;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -16,7 +17,7 @@ public class CommentDTO {
 
     private String content;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
     private Byte nowType;
 

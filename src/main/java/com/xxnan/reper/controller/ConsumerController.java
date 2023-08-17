@@ -84,8 +84,8 @@ public class ConsumerController {
     @ApiOperation("根据ID查询用户")
     public R userOfId(@RequestParam Integer id) {
         log.info("根据ID{}查询用户",id);
-        Consumer consumer=consumerService.userOfId(id);
-        return R.success(null,consumer);
+        List<Consumer> consumers=consumerService.userOfId(id);
+        return R.success(null,consumers);
     }
 
     /**
@@ -139,7 +139,7 @@ public class ConsumerController {
         try {
             String originalFilename = file.getOriginalFilename();
             String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
-            String objectName= PathConstant.USER_AVATOR+UUID.randomUUID().toString()+suffix;
+            String objectName= PathConstant.USER_AVATAR+UUID.randomUUID().toString()+suffix;
             filePath = aliOssUtil.upload(file.getBytes(), objectName);
         } catch (IOException e) {
             return R.fatal(MessageConstant.UPLOAD_FAILED +e.getMessage());

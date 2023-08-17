@@ -2,6 +2,7 @@ package com.xxnan.reper.pojo.DTO;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -16,5 +17,5 @@ public class CollectDTO {
 
     private Integer songListId;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 }

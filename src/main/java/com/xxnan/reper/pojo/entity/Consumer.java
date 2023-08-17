@@ -9,6 +9,7 @@ import net.bytebuddy.asm.Advice;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -29,7 +30,7 @@ public class Consumer implements Serializable {
 
     private String email;
 
-    private Date birth;
+    private LocalDate birth;
 
     private String introduction;
 

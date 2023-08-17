@@ -23,7 +23,7 @@ public interface SongMapper {
     List<Song> criteriaQuery(Integer singerId, String name);
 
     @Select("select * from song where id=#{id}")
-    Song getById(Integer id);
+    List<Song> getById(Integer id);
 
     @AutoFill(OperationType.UPDATE)
     int update(Song song);

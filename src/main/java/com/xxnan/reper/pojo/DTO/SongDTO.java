@@ -2,6 +2,7 @@ package com.xxnan.reper.pojo.DTO;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -16,9 +17,9 @@ public class SongDTO {
 
     private String introduction;
 
-    private Date createTime;
+    private LocalDateTime createTime;
 
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     private String pic;
 

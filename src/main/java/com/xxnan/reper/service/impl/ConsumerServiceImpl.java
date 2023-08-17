@@ -81,8 +81,8 @@ public class ConsumerServiceImpl implements ConsumerService {
     }
 
     @Override
-    public Consumer userOfId(Integer id) {
-        return consumerMapper.getById(id);
+    public List<Consumer> userOfId(Integer id) {
+        return consumerMapper.getBatchById(id);
     }
 
     @Override

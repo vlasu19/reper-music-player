@@ -44,7 +44,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public Song songOfId(Integer id) {
+    public List<Song> songOfId(Integer id) {
         return songMapper.getById(id);
     }
 

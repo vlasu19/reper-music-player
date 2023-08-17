@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -27,7 +28,7 @@ public class Singer implements Serializable {
 
     private String pic;
 
-    private Date birth;
+    private LocalDate birth;
 
     private String location;
 

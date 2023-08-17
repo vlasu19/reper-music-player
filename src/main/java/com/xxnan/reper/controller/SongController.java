@@ -88,8 +88,8 @@ public class SongController {
     @GetMapping("/detail")
     public R songOfId(@RequestParam Integer id) {
         log.info("返回ID{}的歌曲",id);
-        Song song=songService.songOfId(id);
-        return R.success(null,song);
+        List<Song> songs=songService.songOfId(id);
+        return R.success(null,songs);
     }
 
     // 返回指定歌手ID的歌曲

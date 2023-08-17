@@ -2,6 +2,7 @@ package com.xxnan.reper.config;
 
 import com.xxnan.reper.common.constant.PathConstant;
 import com.xxnan.reper.common.json.JacksonObjectMapper;
+import com.xxnan.reper.interceptor.CorsInterceptor;
 import com.xxnan.reper.interceptor.JwtTokenAdminInterceptor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,8 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
 
     @Autowired
     private JwtTokenAdminInterceptor jwtTokenAdminInterceptor;
-
+    @Autowired
+    private CorsInterceptor corsInterceptor;
     /**
      * 注册自定义拦截器
      *
@@ -41,20 +43,22 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addInterceptor(jwtTokenAdminInterceptor)
                 .addPathPatterns("/aaa")
                 .excludePathPatterns("/admin/login/status");
+        registry.addInterceptor(corsInterceptor)
+                .addPathPatterns("/**");
     }
 
     /**
      * 跨域配置
-     * @param registry
+     * @param
      */
-    @Override
-    protected void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowedOrigins("http://localhost:8080")
-                .allowedMethods("GET", "POST", "PUT", "DELETE")
-                .allowedHeaders("Content-Type", "Authorization","Token","x_requested_with")
-                .allowCredentials(true);
-    }
+//    @Override
+//    protected void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/**")
+//                .allowedOrigins(request.getHeader("Origin"))
+//                .allowedMethods("GET", "POST", "PUT", "DELETE")
+//                .allowedHeaders("Content-Type", "Authorization","Token","x_requested_with")
+//                .allowCredentials(true);
+//    }
 
     @Bean
     public Docket docket() {
@@ -83,18 +87,20 @@ public class WebMvcConfiguration extends WebMvcConfigurationSupport {
         registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 
 //        本地资源路径处理
-        registry.addResourceHandler("/img/avatorImages/**")
-                .addResourceLocations(PathConstant.AVATOR_IMAGES_PATH);
-        registry.addResourceHandler("/img/singerPic/**")
-                .addResourceLocations(PathConstant.SINGER_PIC_PATH);
-        registry.addResourceHandler("/img/songPic/**")
-                .addResourceLocations(PathConstant.SONG_PIC_PATH);
-        registry.addResourceHandler("/song/**")
-                .addResourceLocations(PathConstant.SONG_PATH);
-        registry.addResourceHandler("/img/songListPic/**")
-                .addResourceLocations(PathConstant.SONGLIST_PIC_PATH);
-        registry.addResourceHandler("/img/swiper/**")
-                .addResourceLocations(PathConstant.BANNER_PIC_PATH);
+        registry.addResourceHandler(PathConstant.AVATOR_IMAGES_PATH+"**")
+                .addResourceLocations("file:"+PathConstant.ASSETS_PATH+PathConstant.AVATOR_IMAGES_PATH);
+        registry.addResourceHandler(PathConstant.SINGER_PIC_PATH+"**")
+                .addResourceLocations("file:"+PathConstant.ASSETS_PATH+PathConstant.SINGER_PIC_PATH);
+        registry.addResourceHandler(PathConstant.SONG_PIC_PATH+"**")
+                .addResourceLocations("file:"+PathConstant.ASSETS_PATH+PathConstant.SONG_PIC_PATH);
+        registry.addResourceHandler(PathConstant.SONG_PATH+"**")
+                .addResourceLocations("file:"+PathConstant.ASSETS_PATH+PathConstant.SONG_PATH);
+        registry.addResourceHandler(PathConstant.SONGLIST_PIC_PATH+"**")
+                .addResourceLocations("file:"+PathConstant.ASSETS_PATH+PathConstant.SONGLIST_PIC_PATH);
+        registry.addResourceHandler(PathConstant.BANNER_PIC_PATH+"**")
+                .addResourceLocations("file:"+PathConstant.ASSETS_PATH+PathConstant.BANNER_PIC_PATH);
+        registry.addResourceHandler(PathConstant.DEFAULT_PATH+"**")
+                .addResourceLocations("file:"+PathConstant.ASSETS_PATH+PathConstant.DEFAULT_PATH);
     }
 
     /**
