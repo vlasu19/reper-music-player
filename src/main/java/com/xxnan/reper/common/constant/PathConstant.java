@@ -2,10 +2,10 @@ package com.xxnan.reper.common.constant;
 
 public class PathConstant {
     //AliOss资源路径处理
-    public static final String USER_AVATAR="img/user avatar/";
-    public static final String SINGER_PIC="img/singer pic/";
-    public static final String SONGLIST_PIC="img/songList pic/";
-    public static final String SONG_PIC="img/song pic/";
+    public static final String USER_AVATAR="img/userAvatar/";
+    public static final String SINGER_PIC="img/singerPic/";
+    public static final String SONGLIST_PIC="img/songListPic/";
+    public static final String SONG_PIC="img/songPic/";
     public static final String SONG_URL="song/";
 
     //添加时直接设置的默认值
